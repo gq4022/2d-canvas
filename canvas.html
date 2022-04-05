@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #ctx {
+                border: 1px solid gray;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="ctx" width="200" height="200"></canvas>
+        <script>
+            var canvas = document.querySelector('#ctx');
+            var ctx = canvas.getContext('2d');
+
+            function pixelize(x, y, color){
+                var roundX = Math.round(x);
+                var roundY = Math.round(y);
+
+                ctx.fillStyle = color || "#000";
+                ctx.fillRect(roundX, roundY, 1, 1);
+            }
+
+            var timestamp1 = new Date();
+            var colors = ["red", "blue", "yellow", "black", "green"];
+
+            for(var i = 0; i < 5000; ++i) {
+                var x = canvas.width * Math.random();
+                var y = canvas.height * Math.random();
+                console.log(x + " | " + y)
+                var color = colors[i % colors.length];
+                console.log(color);
+                pixelize(x, y, color);
+            }
+
+            var timestamp2 = new Date();
+            var finaltimestamp = timestamp2 - timestamp1;
+
+            console.log('elapsed time: ' + finaltimestamp + ' ms');
+        </script>
+    </body>
+</html>
